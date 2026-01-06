@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Shraddha ❤️</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <audio id="taraAudio" src="tara.mp3"></audio>
+    <audio id="zoroorAudio" src="zoroor.mp3"></audio>
+
+    <div id="main-container">
+
+        <section id="step1" class="step active">
+            <div class="glass-card">
+                <h2 id="gatekeeper-msg">Ruko! Aap bina permission ke entry nahi kar sakte.</h2>
+                <input type="password" id="passwordInput" placeholder="Enter Password...">
+                <button onclick="checkPassword()">Enter</button>
+                <p id="hintText" class="hidden">Hint: try 'Butkiii'</p>
+            </div>
+        </section>
+
+        <section id="step4" class="step">
+            <div class="scanner-box">
+                <h2 id="scanStatus">Scanning for Butkii features...</h2>
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+                <p id="scanDetails"></p>
+            </div>
+        </section>
+
+        <section id="step6" class="step">
+            <h1 class="butkii-mode">BUTKII MODE ON!</h1>
+            <div class="trap-box">
+                <h3>Do you love me?</h3>
+                <div class="btn-group">
+                    <button id="yesBtn" onclick="trapSuccess()">Yes</button>
+                    <button id="noBtn" onmouseover="moveNoButton()">No</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="step7" class="step">
+            <h2>I know ki aap mujhse bohot pyaar karti ho... khikhi!</h2>
+            <img src="meme.jpg" alt="Meme" class="meme-img">
+            <button onclick="nextStep(8)">Next</button>
+        </section>
+
+        <section id="step8" class="step">
+            <p class="typewriter" id="emotionalMsg"></p>
+            <button class="hidden" id="btn8" onclick="nextStep(10)">Hmm...</button>
+        </section>
+
+        <section id="step10" class="step">
+            <div class="promise-card">
+                <h3 id="promiseText">Promise kro 2026 se tu hamesa mere sath rahegi?</h3>
+                <button onclick="nextStep(11)">Yes</button>
+                <button onclick="nextStep(11)">No (Nahi dabega :P)</button>
+            </div>
+        </section>
+
+        <section id="step11" class="step">
+            <h3 id="smallPromiseText">Waada karo, chahe kuch bhi ho, tum apni ye 'Butkii' wali smile nahi kam hogi samjiii.</h3>
+            <button onclick="nextStep(12)">Wada Raha ❤️</button>
+        </section>
+
+        <section id="step12" class="step">
+            <div id="giftBox" onclick="explodeGift()">🎁</div>
+            <div id="birthdayWishes" class="hidden">
+                <h1 class="glow-text">Happy Birthday Shraddha!</h1>
+                <p>May your day be as beautiful as your smile...</p>
+                <button onclick="nextStep(13)">Open Album 📖</button>
+            </div>
+        </section>
+
+        <section id="step13" class="step">
+            <div class="book" id="book" onclick="flipPage()">
+                <div class="page" id="currentPage">
+                    <img id="albumImg" src="ps1.jpg" alt="Shraddha">
+                </div>
+            </div>
+            <p>Click the book to flip pages (1/10)</p>
+        </section>
+
+        <section id="step14" class="step">
+            <div class="envelope" onclick="openLetter()">
+                <div class="letter">
+                    <p>I know m bht si chize nhi de skta lekin phir bhi kuch chahiye ho to Priyanshu yani muje jarur btana birthday girl samji ho ske to m jarur puri krunga</p>
+                </div>
+            </div>
+            <button onclick="nextStep(15)">Final Surprise</button>
+        </section>
+
+        <section id="step15" class="step">
+            <div id="countdown">5</div>
+            <canvas id="fireworksCanvas"></canvas>
+            <h1 id="nameGlow" class="hidden">S-H-R-A-D-D-H-A</h1>
+        </section>
+
+        <section id="step16" class="step">
+            <div id="preMessage">
+                <h3>Kya aap PS ka message padhna chahogi?</h3>
+                <button onclick="startSoulMessage()">YES</button>
+            </div>
+            <div id="messageContainer" class="hidden">
+                <div id="soulMsgBody" class="typewriter-long"></div>
+                <button id="madamJiBtn" class="hidden" onclick="nextStep(17)">Madam jii 💗</button>
+            </div>
+        </section>
+
+        <section id="step17" class="step">
+            <div class="final-box">
+                <h3>Write a message for Priyanshu jo aap unse hamesa se bolna chahti thi...</h3>
+                <textarea id="finalMsg" placeholder="Type here..."></textarea>
+                <button onclick="sendToPriyanshu()">Send Heart ❤️</button>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
