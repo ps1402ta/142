@@ -1,8 +1,6 @@
-// Make sure this file is linked in HTML:
-// <script src="script.js"></script>
-
+// script.js
 document.addEventListener("DOMContentLoaded", () => {
-  // Screens
+  // ====== SCREEN ELEMENTS ======
   const screenGate = document.getElementById("screen-gatekeeper");
   const screenScan = document.getElementById("screen-scan");
   const screenLove = document.getElementById("screen-love");
@@ -15,16 +13,28 @@ document.addEventListener("DOMContentLoaded", () => {
   const screenSoul = document.getElementById("screen-soul");
   const screenLast = document.getElementById("screen-last");
 
-  // Step 1–3: Password logic
+  // ====== STEP 1–3: PASSWORD / GATEKEEPER ======
   const passwordInput = document.getElementById("password-input");
   const passwordSubmit = document.getElementById("password-submit");
   const passwordMessage = document.getElementById("password-message");
   const passwordHint = document.getElementById("password-hint");
+  const gateText = document.getElementById("gatekeeper-text");
 
   let passwordTries = 0;
   const correctPassword = "Butkiii";
 
-  passwordSubmit.addEventListener("click", () => {
+  typeText(
+    gateText,
+    "Ruko! Aap bina permission ke entry nahi kar sakte.",
+    45
+  );
+
+  passwordSubmit.addEventListener("click", handlePassword);
+  passwordInput.addEventListener("keyup", (e) => {
+    if (e.key === "Enter") handlePassword();
+  });
+
+  function handlePassword() {
     const val = (passwordInput.value || "").trim();
     passwordTries++;
 
@@ -36,8 +46,10 @@ document.addEventListener("DOMContentLoaded", () => {
         startScanning();
       }, 800);
     } else {
+      passwordMessage.style.color = "#ff8da1";
       if (passwordTries === 1) {
-        passwordMessage.textContent = "Tu Butkii nahi hai! Chal bahar nikal!";
+        passwordMessage.textContent =
+          "Tu Butkii nahi hai! Chal bahar nikal!";
       } else if (passwordTries === 2) {
         passwordMessage.textContent =
           "Panda ko bta rha koi or ghus rha h buktiii nahi";
@@ -45,17 +57,13 @@ document.addEventListener("DOMContentLoaded", () => {
         passwordMessage.textContent = "Wrong password fir se 😒";
         passwordHint.textContent = "Hint: try 'Butkiii'";
       } else {
-        passwordMessage.textContent = "Ab to Butkiii hi likh de na 😭";
+        passwordMessage.textContent =
+          "Ab to Butkiii hi likh de na, warna system sad ho jayega 😭";
       }
     }
-  });
+  }
 
-  // Enter key on password
-  passwordInput.addEventListener("keyup", (e) => {
-    if (e.key === "Enter") passwordSubmit.click();
-  });
-
-  // Step 4–5: Scanning + Theme Morph
+  // ====== STEP 4–5: SCANNING + THEME CHANGE ======
   const scanBar = document.getElementById("scan-bar");
   const scanStatus = document.getElementById("scan-status");
   const scanMainText = document.getElementById("scan-main-text");
@@ -67,14 +75,13 @@ document.addEventListener("DOMContentLoaded", () => {
       "Checking ego... [High Detected]",
       "Checking cuteness... [Overloaded 💗]",
       "Checking smile... [Dangerously Beautiful]",
-      "BUTKII MODE ON!"
+      "Final verdict... [Certified Butkii ✅]"
     ];
 
     typeText(
       scanMainText,
       "Scanning for Butkii features...",
-      35,
-      () => {}
+      35
     );
 
     const scanInterval = setInterval(() => {
@@ -94,12 +101,12 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => {
           showScreen(screenLove);
           initLoveScreen();
-        }, 800);
+        }, 900);
       }
-    }, 250);
+    }, 260);
   }
 
-  // Step 6: Love question - moving NO button
+  // ====== STEP 6–8: LOVE QUESTION + MEME + EMOTIONAL LINE ======
   const loveQuestion = document.getElementById("love-question");
   const loveYes = document.getElementById("love-yes");
   const loveNo = document.getElementById("love-no");
@@ -112,19 +119,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const goPromise1 = document.getElementById("go-promise-1");
 
   function initLoveScreen() {
-    typeText(loveQuestion, "Do you love me?", 60);
+    typeText(
+      loveQuestion,
+      "Do you love me?",
+      60
+    );
 
-    // make NO run away
+    // NO button will run away
     loveNo.addEventListener("mouseenter", moveNoButton);
     loveNo.addEventListener("touchstart", moveNoButton);
 
     loveYes.addEventListener("click", () => {
-      try {
-        taraAudio.currentTime = 0;
-        taraAudio.play().catch(() => {});
-      } catch (e) {}
-
+      playAudioSafe(taraAudio);
       loveButtons.style.display = "none";
+
       loveAfter.style.display = "flex";
       loveAfter.style.flexDirection = "column";
       loveAfter.style.alignItems = "center";
@@ -156,24 +164,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const maxX = containerRect.width - btnRect.width;
     const maxY = containerRect.height - btnRect.height;
 
-    let randX = Math.random() * maxX;
-    let randY = Math.random() * maxY;
+    let randX = (Math.random() - 0.5) * maxX;
+    let randY = (Math.random() - 0.5) * maxY;
 
-    // ensure button stays visible
     loveNo.style.position = "relative";
     loveNo.style.left = randX + "px";
     loveNo.style.top = randY + "px";
   }
 
-  // Step 10: Promise 1
+  // ====== STEP 10: PROMISE 1 ======
   const promise1Yes = document.getElementById("promise1-yes");
   const promise1No = document.getElementById("promise1-no");
 
   function initPromise1() {
-    const textEl = screenPromise1.querySelector(".typewriter");
+    const textEl = screenPromise1.querySelector(".typewriter.big");
     typeText(
       textEl,
-      "Promise kro 2026 se tu hamesa mere sath rahegi?",
+      "Promise kro, 2026 se tu hamesa mere sath rahegi?",
       45
     );
 
@@ -186,14 +193,14 @@ document.addEventListener("DOMContentLoaded", () => {
     promise1No.onclick = goNext;
   }
 
-  // Step 11: Promise 2
+  // ====== STEP 11: PROMISE 2 ======
   const goGift = document.getElementById("go-gift");
 
   function initPromise2() {
-    const textEl = screenPromise2.querySelector(".typewriter");
+    const textEl = screenPromise2.querySelector(".typewriter.big");
     typeText(
       textEl,
-      "Waada karo, chahe kuch bhi ho, tum apni ye 'Butkii' wali smile nahi kam hogi samjiii.",
+      "Waada karo, chahe kuch bhi ho, tum apni ye 'Butkii' wali smile kabhi kam nahi hone dogi.",
       45
     );
 
@@ -203,7 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 
-  // Step 12: Gift box + confetti
+  // ====== STEP 12: GIFT BOX + CONFETTI ======
   const giftBox = document.getElementById("gift-box");
   const giftMessage = document.getElementById("gift-message");
 
@@ -222,7 +229,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function launchConfetti() {
     const colors = ["#ff6fd8", "#ff9068", "#ffe27a", "#9b5cff", "#00f5d4"];
-    const total = 80;
+    const total = 90;
+    const screen = screenGift;
 
     for (let i = 0; i < total; i++) {
       const conf = document.createElement("span");
@@ -230,37 +238,23 @@ document.addEventListener("DOMContentLoaded", () => {
       conf.style.left = Math.random() * 100 + "%";
       conf.style.backgroundColor =
         colors[Math.floor(Math.random() * colors.length)];
-      conf.style.animationDelay = Math.random() * 1.5 + "s";
-      document.getElementById("screen-gift").appendChild(conf);
+      conf.style.animationDelay = Math.random() * 1.6 + "s";
+      screen.appendChild(conf);
 
       setTimeout(() => conf.remove(), 4000);
     }
   }
 
-  // Step 13: Photo album (ps1.jpg ... ps10.jpg)
-  const albumBook = document.getElementById("album-book");
+  // ====== STEP 13: PHOTO ALBUM (ps1–ps10) ======
   const photoLeft = document.getElementById("photo-left");
   const photoRight = document.getElementById("photo-right");
   const albumPrev = document.getElementById("album-prev");
   const albumNext = document.getElementById("album-next");
   const goLetter = document.getElementById("go-letter");
 
-  let currentIndex = 1; // ps1 & ps2
+  let currentIndex = 1; // ps1 + ps2
 
   function initAlbum() {
-    const pagesText = [
-      "ps1.jpg",
-      "ps2.jpg",
-      "ps3.jpg",
-      "ps4.jpg",
-      "ps5.jpg",
-      "ps6.jpg",
-      "ps7.jpg",
-      "ps8.jpg",
-      "ps9.jpg",
-      "ps10.jpg"
-    ];
-
     function setPhotos() {
       photoLeft.src = `ps${currentIndex}.jpg`;
       const rightIndex = currentIndex + 1;
@@ -297,7 +291,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function flipPages(forward, callback) {
     const leftPage = document.getElementById("page-left");
     const rightPage = document.getElementById("page-right");
-
     const cls = forward ? "flip-forward" : "flip-backward";
 
     rightPage.classList.add(cls);
@@ -312,7 +305,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 750);
   }
 
-  // Step 14: Lifafa with message
+  // ====== STEP 14: LIFAFA ======
   const envelope = document.getElementById("envelope");
   const letter = document.getElementById("letter");
   const goFireworks = document.getElementById("go-fireworks");
@@ -336,7 +329,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 
-  // Step 15: Fireworks + SHRADDHA
+  // ====== STEP 15: FIREWORKS + NAME BLOCK ======
   const countdownEl = document.getElementById("countdown");
   const fireworksArea = document.getElementById("fireworks-area");
   const goSoul = document.getElementById("go-soul");
@@ -356,7 +349,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         setTimeout(() => {
           goSoul.style.display = "inline-block";
-        }, 4000);
+        }, 4500);
       }
     }, 1000);
 
@@ -368,38 +361,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function startFireworks() {
     const colors = ["#ff6fd8", "#ffd700", "#00f5d4", "#9b5cff", "#ff9068"];
-    const centerX = fireworksArea.offsetWidth / 2;
-    const centerY = fireworksArea.offsetHeight / 2;
 
     function spawnFirework() {
-      const particles = 25;
+      const rect = fireworksArea.getBoundingClientRect();
+      const centerX =
+        Math.random() * rect.width * 0.8 + rect.width * 0.1;
+      const centerY =
+        Math.random() * rect.height * 0.5 + rect.height * 0.2;
+
+      const particles = 30;
       for (let i = 0; i < particles; i++) {
         const fw = document.createElement("div");
         fw.className = "firework";
         fw.style.left = centerX + "px";
         fw.style.top = centerY + "px";
         const angle = (Math.PI * 2 * i) / particles;
-        const distance = 80 + Math.random() * 80;
+        const distance = 60 + Math.random() * 90;
         const dx = Math.cos(angle) * distance;
         const dy = Math.sin(angle) * distance;
         fw.style.setProperty("--dx", dx + "px");
         fw.style.setProperty("--dy", dy + "px");
-        fw.style.background = colors[Math.floor(Math.random() * colors.length)];
+        fw.style.background =
+          colors[Math.floor(Math.random() * colors.length)];
         fireworksArea.appendChild(fw);
-        setTimeout(() => fw.remove(), 1200);
+        setTimeout(() => fw.remove(), 1500);
       }
     }
 
-    // blast few times
     let times = 0;
     const fwInterval = setInterval(() => {
       spawnFirework();
       times++;
-      if (times > 5) clearInterval(fwInterval);
-    }, 700);
+      if (times > 8) clearInterval(fwInterval);
+    }, 600);
   }
 
-  // Step 16: Soul message
+  // ====== STEP 16: SOUL MESSAGE ======
   const soulQuestion = document.getElementById("soul-question");
   const soulYes = document.getElementById("soul-yes");
   const zoroorAudio = document.getElementById("zoroor-audio");
@@ -461,10 +458,7 @@ Happpppppyyyy Birthday meri Shraddha 🎂❤️
     soulYes.onclick = () => {
       soulYes.style.display = "none";
       soulMsgContainer.style.display = "block";
-      try {
-        zoroorAudio.currentTime = 0;
-        zoroorAudio.play().catch(() => {});
-      } catch (e) {}
+      playAudioSafe(zoroorAudio);
 
       typeText(soulMsgEl, soulFullMessage, 30, () => {
         goLast.style.display = "inline-block";
@@ -477,7 +471,7 @@ Happpppppyyyy Birthday meri Shraddha 🎂❤️
     };
   }
 
-  // Step 17: Last message from her
+  // ====== STEP 17: HER MESSAGE TO YOU ======
   const herMessage = document.getElementById("her-message");
   const sendMessage = document.getElementById("send-message");
   const thankYou = document.getElementById("thank-you");
@@ -486,29 +480,28 @@ Happpppppyyyy Birthday meri Shraddha 🎂❤️
     const textEl = screenLast.querySelector(".typewriter");
     typeText(
       textEl,
-      "Kuch likho jo tum Priyanshu ko hamesa se bolna chahti thi...",
+      "Jo baat tumne kabhi directly nahi boli, woh yaha likh do…",
       50
     );
 
     sendMessage.onclick = () => {
-      if (!herMessage.value.trim()) {
+      const val = herMessage.value.trim();
+      if (!val) {
         alert("Kuch toh likh do Butkii 💗");
         return;
       }
       thankYou.style.display = "block";
-      // Yaha se tum manually message dekh sakte ho (browser console, etc.)
-      console.log("Shraddha ka message:", herMessage.value);
+      console.log("Shraddha ka message:", val);
     };
   }
 
-  // Utility: screen switch
+  // ====== HELPERS ======
   function showScreen(target) {
     const allScreens = document.querySelectorAll(".screen");
     allScreens.forEach((s) => (s.style.display = "none"));
     target.style.display = "flex";
   }
 
-  // Utility: typewriter effect
   function typeText(el, fullText, speed = 40, callback) {
     el.textContent = "";
     let i = 0;
@@ -518,18 +511,20 @@ Happpppppyyyy Birthday meri Shraddha 🎂❤️
         el.textContent += fullText.charAt(i);
         i++;
         setTimeout(type, speed);
-      } else {
-        if (callback) callback();
+      } else if (callback) {
+        callback();
       }
     }
     type();
   }
 
-  // Start initial typewriter on gate screen
-  const gateText = document.getElementById("gatekeeper-text");
-  typeText(
-    gateText,
-    "Ruko! Aap bina permission ke entry nahi kar sakte.",
-    50
-  );
+  function playAudioSafe(audioEl) {
+    try {
+      audioEl.currentTime = 0;
+      const playPromise = audioEl.play();
+      if (playPromise && playPromise.catch) {
+        playPromise.catch(() => {});
+      }
+    } catch (e) {}
+  }
 });
