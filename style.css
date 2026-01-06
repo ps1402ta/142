@@ -1,193 +1,361 @@
-/* Basic reset */
+/* ========== RESET ========== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Body default (dark for start) */
+/* ========== BODY / BACKGROUND ========== */
 body {
-  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  background: radial-gradient(circle at top, #222, #000);
-  color: #f5f5f5;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: radial-gradient(circle at top, #12081f, #050309 55%, #020107);
+  color: #fdf8ff;
+  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow: hidden;
 }
 
-/* All screens same layout */
+/* Floating soft lights (romantic bokeh) */
+.bg-bokeh {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(24px);
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-bokeh-1 {
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, #ff6fd8, transparent 60%);
+  top: -60px;
+  left: -40px;
+  animation: float1 16s linear infinite alternate;
+}
+
+.bg-bokeh-2 {
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, #ffafbd, transparent 60%);
+  bottom: -80px;
+  right: -40px;
+  animation: float2 18s linear infinite alternate;
+}
+
+.bg-bokeh-3 {
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, #ffe27a, transparent 60%);
+  top: 40%;
+  left: 65%;
+  animation: float3 22s linear infinite alternate;
+}
+
+@keyframes float1 {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(30px, 40px); }
+}
+@keyframes float2 {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(-25px, -30px); }
+}
+@keyframes float3 {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(-20px, 30px); }
+}
+
+/* ========== MAIN WRAPPER / GLASS CARD ========== */
+#app-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 960px;
+  padding: 24px;
+}
+
 .screen {
   width: 100%;
-  max-width: 900px;
   min-height: 80vh;
-  display: flex;
-  flex-direction: column;
+  display: none;           /* JS will show */
   justify-content: center;
   align-items: center;
+}
+
+#screen-gatekeeper {
+  display: flex;           /* first screen visible */
+}
+
+.screen-inner {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 26px 22px 28px;
+  border-radius: 22px;
+  background: radial-gradient(circle at top, rgba(255,255,255,0.2), rgba(10,0,20,0.8));
+  box-shadow:
+    0 18px 50px rgba(0,0,0,0.7),
+    0 0 0 1px rgba(255,255,255,0.04);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   text-align: center;
-  padding: 20px;
 }
 
-/* Typewriter base (JS will handle real effect, this is just style) */
+/* For fireworks screen (full black) */
+.screen-inner.no-glass {
+  background: radial-gradient(circle at top, #050412, #000);
+  box-shadow: none;
+}
+
+/* ========== TYPOGRAPHY ========== */
+.cursive {
+  font-family: "Great Vibes", "Pacifico", cursive;
+}
+
+.app-title {
+  font-size: 2.6rem;
+  margin-bottom: 4px;
+  color: #ffe4ff;
+  text-shadow:
+    0 0 10px rgba(255,255,255,0.9),
+    0 0 25px rgba(255,20,147,0.9);
+}
+
+.subtitle {
+  font-size: 0.98rem;
+  color: #f3d4ff;
+  opacity: 0.9;
+  margin-bottom: 18px;
+}
+
+.section-title {
+  font-size: 1.4rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #ffd6ff;
+  margin-bottom: 12px;
+}
+
 .typewriter {
-  max-width: 800px;
-  font-size: 1.2rem;
-  line-height: 1.6;
-  margin-bottom: 20px;
+  max-width: 700px;
+  margin: 12px auto 18px;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #fff9ff;
   white-space: pre-wrap;
-  color: #fefefe;
 }
 
-/* Inputs / buttons */
+.typewriter.big {
+  font-size: 1.35rem;
+  font-weight: 500;
+}
+
+.subnote {
+  font-size: 0.9rem;
+  color: #f0cfff;
+  opacity: 0.85;
+  margin-bottom: 10px;
+}
+
+.subnote.small {
+  font-size: 0.85rem;
+}
+
+/* Scrollable area for long soul message */
+.scrollable {
+  max-height: 55vh;
+  overflow-y: auto;
+  text-align: left;
+}
+
+/* Custom scrollbar (soul message) */
+.scrollable::-webkit-scrollbar {
+  width: 6px;
+}
+.scrollable::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.04);
+  border-radius: 8px;
+}
+.scrollable::-webkit-scrollbar-thumb {
+  background: rgba(255,150,210,0.7);
+  border-radius: 8px;
+}
+
+/* ========== INPUTS / BUTTONS ========== */
 input[type="password"],
 textarea {
+  width: 100%;
+  max-width: 320px;
   padding: 10px 14px;
-  border-radius: 6px;
-  border: none;
+  margin: 8px auto 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(10,0,25,0.45);
+  color: #fff;
+  font-size: 0.98rem;
   outline: none;
-  font-size: 1rem;
-  margin: 10px 0;
-  width: 80%;
-  max-width: 350px;
+  transition: border 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+textarea {
+  max-width: 100%;
+  border-radius: 18px;
+  background: rgba(10,0,25,0.6);
+  min-height: 130px;
+  resize: vertical;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(240,220,255,0.65);
+}
+
+input:focus,
+textarea:focus {
+  border-color: rgba(255,137,205,1);
+  box-shadow: 0 0 0 1px rgba(255,137,205,0.6);
+  background: rgba(10,0,25,0.8);
 }
 
 button {
-  margin: 8px;
-  padding: 10px 20px;
+  margin: 8px 6px;
+  padding: 10px 22px;
   border-radius: 999px;
   border: none;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s;
+  color: #fff;
+  background: linear-gradient(135deg, #ff6fd8, #ff9068);
+  box-shadow: 0 6px 18px rgba(255,144,104,0.4);
+  transition: transform 0.16s ease, box-shadow 0.18s ease, filter 0.16s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.06);
+  box-shadow: 0 8px 20px rgba(255,144,104,0.6);
 }
 
 button:active {
-  transform: scale(0.96);
+  transform: translateY(1px) scale(0.97);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.5);
 }
 
-/* Default button colors */
-#password-submit,
-#love-yes,
-#love-no,
-#promise1-yes,
-#promise1-no,
-#go-promise-1,
-#go-gift,
-#album-prev,
-#album-next,
-#go-letter,
-#go-fireworks,
-#go-soul,
-#soul-yes,
-#go-last,
-#send-message {
-  background: linear-gradient(135deg, #ff6fd8, #ff9068);
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(255, 144, 104, 0.35);
+/* Love buttons row */
+#love-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  margin: 10px 0 4px;
+  position: relative;
 }
 
 #love-no {
   background: linear-gradient(135deg, #555, #222);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
 }
 
-/* Password messages */
+/* Messages under inputs */
 #password-message {
-  margin-top: 10px;
-  font-size: 0.95rem;
-  color: #ff7070;
+  margin-top: 6px;
   min-height: 22px;
+  font-size: 0.9rem;
+  color: #ff8da1;
 }
 
 #password-hint {
-  margin-top: 4px;
-  font-size: 0.9rem;
-  color: #ffd369;
+  margin-top: 2px;
+  font-size: 0.83rem;
+  color: #ffe27a;
 }
 
-/* Step 4: Scanning bar */
+/* ========== SCANNING BAR ========== */
 #scan-bar-container {
-  width: 80%;
-  max-width: 500px;
-  height: 16px;
+  width: 100%;
+  max-width: 480px;
+  height: 14px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255,255,255,0.16);
   overflow: hidden;
-  margin: 20px 0;
+  margin: 20px auto 12px;
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
 }
 
 #scan-bar {
   width: 0%;
   height: 100%;
-  background: linear-gradient(90deg, #ff6fd8, #ffc3a0);
+  background: linear-gradient(90deg, #ff6fd8, #ffc3a0, #ffe27a);
   border-radius: 999px;
-  transition: width 0.2s linear;
+  transition: width 0.22s linear;
 }
 
 #scan-status {
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: #ffd6f3;
 }
 
-/* Step 6: Love screen */
-#love-question {
-  font-size: 1.6rem;
-  font-weight: 600;
-  margin-bottom: 20px;
-}
-
-#love-buttons {
-  display: flex;
-  gap: 20px;
-}
-
-/* Meme */
+/* ========== MEME IMAGE ========== */
 #meme-image {
-  margin-top: 20px;
-  max-width: 220px;
-  border-radius: 16px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  margin-top: 16px;
+  max-width: 230px;
+  border-radius: 20px;
+  box-shadow: 0 12px 26px rgba(0,0,0,0.65);
 }
 
-/* Step 10/11 promises */
-#screen-promise-1 .typewriter,
-#screen-promise-2 .typewriter {
-  font-size: 1.3rem;
-  font-weight: 500;
-}
-
-/* Step 12: Gift box + party */
+/* ========== GIFT BOX & BIRTHDAY TEXT ========== */
 #screen-gift {
   position: relative;
   overflow: hidden;
 }
 
 #gift-box {
-  font-size: 6rem;
+  font-size: 4.2rem;
   cursor: pointer;
-  animation: gift-pulse 1.2s infinite alternate;
+  margin: 12px 0;
+  animation: gift-pulse 1.2s ease-in-out infinite alternate;
 }
 
 @keyframes gift-pulse {
   from {
     transform: scale(1);
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    text-shadow: 0 0 10px rgba(255,255,255,0.5);
   }
   to {
     transform: scale(1.08);
-    text-shadow: 0 0 24px rgba(255, 255, 255, 0.8);
+    text-shadow: 0 0 22px rgba(255,255,255,0.9);
   }
 }
 
-/* Falling confetti (will be added via JS as spans) */
+#birthday-text {
+  margin-top: 20px;
+  font-family: "Great Vibes", cursive;
+  font-size: 3rem;
+  color: #fff5fb;
+  text-align: center;
+  text-shadow:
+    0 0 12px rgba(255,255,255,0.9),
+    0 0 30px rgba(255,105,180,1);
+}
+
+#birthday-text .sub {
+  display: block;
+  margin-top: 8px;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.15rem;
+  text-shadow: none;
+}
+
+/* Confetti pieces (JS adds .confetti) */
 .confetti {
   position: absolute;
   width: 8px;
   height: 14px;
   border-radius: 3px;
-  opacity: 0.9;
+  opacity: 0.95;
   animation: confetti-fall 3s linear forwards;
 }
 
@@ -196,86 +364,54 @@ button:active {
     transform: translateY(-20vh) rotateZ(0deg);
   }
   100% {
-    transform: translateY(120vh) rotateZ(360deg);
+    transform: translateY(110vh) rotateZ(360deg);
   }
 }
 
-/* Birthday text styling */
-#birthday-text {
-  margin-top: 30px;
-  font-size: 2.4rem;
-  line-height: 1.4;
-  color: #ffffff;
-  text-align: center;
-  text-shadow: 0 0 12px rgba(255, 255, 255, 0.8),
-               0 0 25px rgba(255, 0, 150, 0.9);
-  animation: glow 1.5s ease-in-out infinite alternate;
-}
-
-@keyframes glow {
-  from {
-    text-shadow:
-      0 0 8px rgba(255, 255, 255, 0.7),
-      0 0 18px rgba(255, 20, 147, 0.9);
-  }
-  to {
-    text-shadow:
-      0 0 16px rgba(255, 255, 255, 1),
-      0 0 32px rgba(255, 105, 180, 1);
-  }
-}
-
-/* Step 13: 3D photo album */
+/* ========== 3D PHOTO ALBUM ========== */
 #album-book {
-  width: 80%;
-  max-width: 700px;
+  width: 100%;
+  max-width: 680px;
   height: 320px;
+  margin: 18px auto;
   perspective: 1200px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
 }
 
 .album-page {
   width: 50%;
   height: 100%;
-  background: #111;
-  border-radius: 10px;
+  background: #0c0715;
+  border-radius: 14px;
   overflow: hidden;
   position: relative;
-  transform-origin: center right;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.6);
 }
 
 #page-left {
-  margin-right: 2px;
-  transform-origin: center left;
+  margin-right: 4px;
 }
 
 #page-right {
-  margin-left: 2px;
+  margin-left: 4px;
 }
 
-/* Image styling inside album */
 .album-page img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-/* Page flip animation class (JS will toggle) */
+/* Flip animations */
 .flip-forward {
   animation: flip-forward 0.7s ease forwards;
 }
 
 @keyframes flip-forward {
-  0% {
-    transform: rotateY(0deg);
-  }
-  100% {
-    transform: rotateY(-180deg);
-  }
+  0%   { transform: rotateY(0deg); }
+  100% { transform: rotateY(-180deg); }
 }
 
 .flip-backward {
@@ -283,173 +419,211 @@ button:active {
 }
 
 @keyframes flip-backward {
-  0% {
-    transform: rotateY(-180deg);
-  }
-  100% {
-    transform: rotateY(0deg);
-  }
+  0%   { transform: rotateY(-180deg); }
+  100% { transform: rotateY(0deg); }
 }
 
-/* Step 14: Lifafa */
+.album-controls {
+  margin-bottom: 12px;
+}
+
+/* ========== LIFAFA / LETTER ========== */
 #envelope {
-  font-size: 6rem;
+  font-size: 4.4rem;
   cursor: pointer;
-  animation: envelope-bounce 1.2s infinite alternate;
+  margin: 12px 0;
+  animation: envelope-bounce 1.4s ease-in-out infinite alternate;
 }
 
 @keyframes envelope-bounce {
-  from {
-    transform: translateY(0px);
-  }
-  to {
-    transform: translateY(-10px);
-  }
+  from { transform: translateY(0px); }
+  to   { transform: translateY(-8px); }
 }
 
-/* Letter box */
 #letter {
-  margin-top: 20px;
+  margin-top: 16px;
   padding: 16px 20px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 16px;
+  background: radial-gradient(circle at top, rgba(255,255,255,0.2), rgba(10,0,20,0.7));
+  border: 1px solid rgba(255,255,255,0.32);
 }
 
-/* Step 15: Fireworks + name */
+/* ========== FIREWORKS & NAME BLOCK ========== */
 #screen-fireworks {
-  background: #000;
+  background: radial-gradient(circle at top, #050412, #000);
   color: #fff;
 }
 
 #countdown {
-  font-size: 4rem;
+  font-size: 3.8rem;
   font-weight: 700;
-  letter-spacing: 10px;
+  letter-spacing: 0.3em;
+  margin-bottom: 6px;
 }
 
 #fireworks-area {
   position: relative;
   width: 100%;
-  height: 70vh;
-  margin-top: 10px;
+  height: 68vh;
+  margin-top: 6px;
   overflow: hidden;
 }
 
-/* Firework particle (JS will create) */
+/* Firework particles */
 .firework {
   position: absolute;
-  width: 6px;
-  height: 6px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
   opacity: 0;
-  animation: firework-explode 1.2s ease-out forwards;
+  filter: blur(0.5px);
+  animation: firework-explode 1.4s ease-out forwards;
 }
 
 @keyframes firework-explode {
   0% {
     transform: translate(0, 0) scale(0.4);
     opacity: 1;
+    box-shadow: 0 0 6px rgba(255,255,255,0.9);
+  }
+  70% {
+    opacity: 1;
   }
   100% {
-    transform: translate(var(--dx), var(--dy)) scale(1.2);
+    transform: translate(var(--dx), var(--dy)) scale(1.1);
     opacity: 0;
+    box-shadow: 0 0 0 rgba(0,0,0,0);
   }
 }
 
-/* Name glowing in center */
-#name-shraddha {
+/* Center text on fireworks */
+#name-block {
   position: absolute;
   inset: 0;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 3rem;
-  font-weight: 800;
-  letter-spacing: 0.6rem;
-  text-align: center;
-  color: #ffe4ff;
+  pointer-events: none;
+}
+
+#name-line-1 {
+  font-family: "Great Vibes", cursive;
+  font-size: 4.3rem;
+  color: #ffe5ff;
   text-shadow:
-    0 0 10px rgba(255, 255, 255, 0.8),
-    0 0 30px rgba(255, 20, 147, 1),
-    0 0 60px rgba(255, 105, 180, 1);
-  animation: name-pulse 1.7s infinite alternate;
+    0 0 12px rgba(255,255,255,1),
+    0 0 40px rgba(255,20,147,1),
+    0 0 70px rgba(255,105,180,1);
+  animation: name-glow 2s ease-in-out infinite alternate;
 }
 
-@keyframes name-pulse {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.06);
-  }
+#name-line-2 {
+  margin-top: 4px;
+  font-size: 1.8rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #ffddee;
+  text-shadow:
+    0 0 10px rgba(255,255,255,0.9),
+    0 0 30px rgba(255,0,120,0.9);
+  animation: name-glow 2s ease-in-out infinite alternate;
 }
 
-/* Step 16: soul message */
-#soul-message-container {
-  margin-top: 20px;
-  max-width: 800px;
+@keyframes name-glow {
+  from { transform: scale(1);   opacity: 0.9; }
+  to   { transform: scale(1.05); opacity: 1; }
 }
 
-#soul-message {
-  text-align: left;
-  font-size: 1.05rem;
-  line-height: 1.7;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 16px 18px;
-  border-radius: 12px;
+/* ========== LAST LETTER CARD ========== */
+.letter-card {
+  margin: 14px auto 10px;
+  max-width: 640px;
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: radial-gradient(circle at top, rgba(255,255,255,0.12), rgba(10,0,20,0.9));
+  border: 1px solid rgba(255,255,255,0.25);
 }
 
-/* Step 17: last message */
-#screen-last textarea {
-  max-width: 700px;
-  width: 100%;
-  resize: vertical;
-  background: rgba(0, 0, 0, 0.3);
-  color: #fff;
-}
-
+/* Thank-you text */
 #thank-you {
-  margin-top: 12px;
-  font-size: 1rem;
+  margin-top: 10px;
+  font-size: 0.98rem;
   color: #ffd6f3;
 }
 
-/* PINK/WHITE THEME (after BUTKII MODE ON) */
-/* JS will add class .butkii-theme to body */
+/* ========== THEME CHANGE AFTER BUTKII MODE ========== */
 body.butkii-theme {
-  background: radial-gradient(circle at top, #ffe5f5, #ffb6d8);
-  color: #3d002e;
+  background: radial-gradient(circle at top left, #ffdde1, #ee9ca7, #ffafbd);
+}
+
+body.butkii-theme .screen-inner {
+  background: radial-gradient(circle at top, rgba(255,255,255,0.28), rgba(255,182,214,0.5));
+  box-shadow:
+    0 18px 50px rgba(255,105,180,0.6),
+    0 0 0 1px rgba(255,255,255,0.4);
 }
 
 body.butkii-theme .typewriter {
   color: #3d002e;
 }
 
-body.butkii-theme button {
-  box-shadow: 0 4px 12px rgba(255, 105, 180, 0.4);
+body.butkii-theme .subtitle,
+body.butkii-theme .subnote,
+body.butkii-theme .section-title {
+  color: #5b003e;
 }
 
-/* Responsive tweaks */
-@media (max-width: 600px) {
+/* Buttons glow a bit more in pink theme */
+body.butkii-theme button {
+  box-shadow: 0 6px 20px rgba(255,105,180,0.75);
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 640px) {
+  #app-wrapper {
+    padding: 14px;
+  }
+
+  .screen-inner {
+    padding: 20px 16px 22px;
+  }
+
+  .app-title {
+    font-size: 2.1rem;
+  }
+
   .typewriter {
     font-size: 1rem;
   }
 
-  #birthday-text {
-    font-size: 1.7rem;
+  .typewriter.big {
+    font-size: 1.18rem;
   }
 
-  #love-buttons {
-    flex-direction: column;
+  #birthday-text {
+    font-size: 2.4rem;
+  }
+
+  #name-line-1 {
+    font-size: 3.3rem;
+  }
+
+  #name-line-2 {
+    font-size: 1.4rem;
+    letter-spacing: 0.16em;
+  }
+
+  #countdown {
+    font-size: 3rem;
+    letter-spacing: 0.2em;
   }
 
   #album-book {
     height: 260px;
   }
 
-  #name-shraddha {
-    font-size: 2.2rem;
-    letter-spacing: 0.3rem;
+  #love-buttons {
+    flex-direction: column;
   }
 }
