@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="hi">
 <head>
@@ -136,7 +137,7 @@
       <div class="screen-inner">
         <h2 class="section-title">Some Little Memories</h2>
         <p class="subnote small">
-          Slide the pages… har page pe ek chhota sa “tum”.
+          Slide the pages… har page pe ek chhota sa "tum".
         </p>
         <div id="album-book">
           <div class="album-page" id="page-left">
@@ -202,17 +203,24 @@
       </div>
     </section>
 
-    <!-- Step 17: Her Message to Priyanshu -->
+    <!-- Step 17: Her Message to Priyanshu (REPLACED WITH FORM) -->
     <section id="screen-last" class="screen" style="display:none;">
       <div class="screen-inner">
         <h2 class="section-title">Your Tiny Letter</h2>
         <div class="typewriter">
           Jo baat tumne kabhi directly nahi boli, woh yaha likh do…
         </div>
-        <div class="letter-card">
-          <textarea id="her-message" rows="6" placeholder="Yaha likho apna secret message..."></textarea>
-        </div>
-        <button id="send-message">Send</button>
+        
+        <!-- NEW FORM ADDED HERE -->
+        <form action="https://formsubmit.co/indianeditorps@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="🎂 Shraddha Birthday Message">
+          
+          <div class="letter-card">
+            <textarea name="message" rows="6" placeholder="Yaha likho apna secret message..." required></textarea>
+          </div>
+          <button type="submit" id="send-message">Send</button>
+        </form>
+        
         <div id="thank-you" style="display:none;">
           Thank you Butkii, ye message Priyanshu tak pahunch gaya. 💗
         </div>
