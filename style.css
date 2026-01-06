@@ -1,0 +1,232 @@
+/* General Settings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #0a0a0a; /* Dark Theme Initially */
+    color: white;
+    overflow-x: hidden;
+    transition: background 1s ease;
+}
+
+#main-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Steps Handling */
+.step {
+    display: none;
+    width: 90%;
+    max-width: 600px;
+    animation: fadeIn 0.8s ease;
+}
+
+.step.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Glassmorphism Card (Step 1) */
+.glass-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+input {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    margin: 10px 0;
+    width: 80%;
+}
+
+button {
+    padding: 10px 20px;
+    background: #ff4d6d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #ff758f;
+    transform: scale(1.05);
+}
+
+/* Scanning Step 4 */
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background: #333;
+    border-radius: 5px;
+    margin: 20px 0;
+    overflow: hidden;
+}
+
+.progress-fill {
+    width: 0%;
+    height: 100%;
+    background: #ff4d6d;
+    transition: width 0.5s;
+}
+
+/* Pink Mode (Step 5 & 6) */
+.pink-mode {
+    background-color: #ffe5ec !important;
+    color: #ff4d6d !important;
+}
+
+.butkii-mode {
+    font-size: 3rem;
+    text-shadow: 0 0 10px #ff4d6d;
+    animation: blink 1s infinite alternate;
+}
+
+@keyframes blink {
+    from { opacity: 0.5; }
+    to { opacity: 1; }
+}
+
+/* Trap Buttons (Step 6) */
+.btn-group {
+    position: relative;
+    height: 100px;
+    margin-top: 20px;
+}
+
+#noBtn {
+    position: absolute;
+    transition: 0.2s;
+}
+
+/* Meme Image */
+.meme-img {
+    width: 250px;
+    border-radius: 15px;
+    margin: 20px 0;
+}
+
+/* Gift Explosion (Step 12) */
+#giftBox {
+    font-size: 100px;
+    cursor: pointer;
+    animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.glow-text {
+    font-size: 3.5rem;
+    color: #fff;
+    text-shadow: 0 0 10px #ff0055, 0 0 20px #ff0055, 0 0 40px #ff0055;
+    animation: textGlow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes textGlow {
+    from { text-shadow: 0 0 10px #ff0055, 0 0 20px #ff0055; }
+    to { text-shadow: 0 0 20px #ff0055, 0 0 40px #ff0055, 0 0 60px #ffb3c1; }
+}
+
+/* 3D Photo Album (Step 13) */
+.book {
+    width: 300px;
+    height: 400px;
+    margin: 0 auto;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.page {
+    width: 100%;
+    height: 100%;
+    background: white;
+    border: 5px solid #fff;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transform-origin: left;
+}
+
+.page img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Lifafa (Step 14) */
+.envelope {
+    width: 200px;
+    height: 150px;
+    background: #ff4d6d;
+    margin: 0 auto;
+    position: relative;
+    cursor: pointer;
+    border-radius: 0 0 10px 10px;
+}
+
+.envelope::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: 0;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    border-bottom: 100px solid #ff758f;
+}
+
+.letter {
+    background: white;
+    color: #333;
+    padding: 10px;
+    font-size: 0.8rem;
+    position: absolute;
+    bottom: 10px;
+    left: 5%;
+    width: 90%;
+    transition: 0.5s;
+    z-index: -1;
+}
+
+/* Soul Message (Step 16) */
+.typewriter-long {
+    text-align: left;
+    background: rgba(0,0,0,0.8);
+    padding: 20px;
+    border-radius: 10px;
+    line-height: 1.6;
+    max-height: 60vh;
+    overflow-y: auto;
+    white-space: pre-wrap;
+}
+
+/* Final Steps Styling */
+textarea {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.hidden { display: none; }
