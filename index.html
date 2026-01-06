@@ -1,124 +1,149 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Shraddha ❤️</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Shraddha Special 💗</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
-    <audio id="taraAudio" src="tara.mp3"></audio>
-    <audio id="zoroorAudio" src="zoroor.mp3"></audio>
-
-    <div id="main-container">
-
-        <section id="step1" class="step active">
-            <div class="glass-card">
-                <h2 id="gatekeeper-msg">Ruko! Aap bina permission ke entry nahi kar sakte.</h2>
-                <input type="password" id="passwordInput" placeholder="Enter Password...">
-                <button onclick="checkPassword()">Enter</button>
-                <p id="hintText" class="hidden">Hint: try 'Butkiii'</p>
-            </div>
-        </section>
-
-        <section id="step4" class="step">
-            <div class="scanner-box">
-                <h2 id="scanStatus">Scanning for Butkii features...</h2>
-                <div class="progress-bar"><div class="progress-fill"></div></div>
-                <p id="scanDetails"></p>
-            </div>
-        </section>
-
-        <section id="step6" class="step">
-            <h1 class="butkii-mode">BUTKII MODE ON!</h1>
-            <div class="trap-box">
-                <h3>Do you love me?</h3>
-                <div class="btn-group">
-                    <button id="yesBtn" onclick="trapSuccess()">Yes</button>
-                    <button id="noBtn" onmouseover="moveNoButton()">No</button>
-                </div>
-            </div>
-        </section>
-
-        <section id="step7" class="step">
-            <h2>I know ki aap mujhse bohot pyaar karti ho... khikhi!</h2>
-            <img src="meme.jpg" alt="Meme" class="meme-img">
-            <button onclick="nextStep(8)">Next</button>
-        </section>
-
-        <section id="step8" class="step">
-            <p class="typewriter" id="emotionalMsg"></p>
-            <button class="hidden" id="btn8" onclick="nextStep(10)">Hmm...</button>
-        </section>
-
-        <section id="step10" class="step">
-            <div class="promise-card">
-                <h3 id="promiseText">Promise kro 2026 se tu hamesa mere sath rahegi?</h3>
-                <button onclick="nextStep(11)">Yes</button>
-                <button onclick="nextStep(11)">No (Nahi dabega :P)</button>
-            </div>
-        </section>
-
-        <section id="step11" class="step">
-            <h3 id="smallPromiseText">Waada karo, chahe kuch bhi ho, tum apni ye 'Butkii' wali smile nahi kam hogi samjiii.</h3>
-            <button onclick="nextStep(12)">Wada Raha ❤️</button>
-        </section>
-
-        <section id="step12" class="step">
-            <div id="giftBox" onclick="explodeGift()">🎁</div>
-            <div id="birthdayWishes" class="hidden">
-                <h1 class="glow-text">Happy Birthday Shraddha!</h1>
-                <p>May your day be as beautiful as your smile...</p>
-                <button onclick="nextStep(13)">Open Album 📖</button>
-            </div>
-        </section>
-
-        <section id="step13" class="step">
-            <div class="book" id="book" onclick="flipPage()">
-                <div class="page" id="currentPage">
-                    <img id="albumImg" src="ps1.jpg" alt="Shraddha">
-                </div>
-            </div>
-            <p>Click the book to flip pages (1/10)</p>
-        </section>
-
-        <section id="step14" class="step">
-            <div class="envelope" onclick="openLetter()">
-                <div class="letter">
-                    <p>I know m bht si chize nhi de skta lekin phir bhi kuch chahiye ho to Priyanshu yani muje jarur btana birthday girl samji ho ske to m jarur puri krunga</p>
-                </div>
-            </div>
-            <button onclick="nextStep(15)">Final Surprise</button>
-        </section>
-
-        <section id="step15" class="step">
-            <div id="countdown">5</div>
-            <canvas id="fireworksCanvas"></canvas>
-            <h1 id="nameGlow" class="hidden">S-H-R-A-D-D-H-A</h1>
-        </section>
-
-        <section id="step16" class="step">
-            <div id="preMessage">
-                <h3>Kya aap PS ka message padhna chahogi?</h3>
-                <button onclick="startSoulMessage()">YES</button>
-            </div>
-            <div id="messageContainer" class="hidden">
-                <div id="soulMsgBody" class="typewriter-long"></div>
-                <button id="madamJiBtn" class="hidden" onclick="nextStep(17)">Madam jii 💗</button>
-            </div>
-        </section>
-
-        <section id="step17" class="step">
-            <div class="final-box">
-                <h3>Write a message for Priyanshu jo aap unse hamesa se bolna chahti thi...</h3>
-                <textarea id="finalMsg" placeholder="Type here..."></textarea>
-                <button onclick="sendToPriyanshu()">Send Heart ❤️</button>
-            </div>
-        </section>
-
+  <!-- Step 1: Gatekeeper Screen -->
+  <div id="screen-gatekeeper" class="screen">
+    <div class="typewriter" id="gatekeeper-text">
+      Ruko! Aap bina permission ke entry nahi kar sakte.
     </div>
+    <input type="password" id="password-input" placeholder="Password daalo yaha...">
+    <button id="password-submit">Enter</button>
+    <div id="password-message"></div>
+    <div id="password-hint"></div>
+  </div>
 
-    <script src="script.js"></script>
+  <!-- Step 4 & 5: Scanning + Theme Morph -->
+  <div id="screen-scan" class="screen" style="display:none;">
+    <div class="typewriter" id="scan-main-text">
+      Scanning for Butkii features...
+    </div>
+    <div id="scan-bar-container">
+      <div id="scan-bar"></div>
+    </div>
+    <div id="scan-status"></div>
+  </div>
+
+  <!-- Step 6 & 7 & 8: Love Question + Meme + Emotional line -->
+  <div id="screen-love" class="screen" style="display:none;">
+    <div class="typewriter" id="love-question">
+      Do you love me?
+    </div>
+    <div id="love-buttons">
+      <button id="love-yes">YES</button>
+      <button id="love-no">NO</button>
+    </div>
+    <audio id="tara-audio" src="tara.mp3"></audio>
+
+    <div id="love-after" style="display:none;">
+      <div class="typewriter" id="love-after-text">
+        I know ki aap mujhse bohot pyaar karti ho... khikhi!
+      </div>
+      <img id="meme-image" src="meme.jpg" alt="Meme" />
+      <div class="typewriter" id="emotional-line">
+        i know aaj ka din teko psnd nhi phir bhi kuch special he hua tha aaj se 20 saal phle haina ?
+      </div>
+      <button id="go-promise-1">Next ➝</button>
+    </div>
+  </div>
+
+  <!-- Step 10: Promise 1 -->
+  <div id="screen-promise-1" class="screen" style="display:none;">
+    <div class="typewriter">
+      Promise kro 2026 se tu hamesa mere sath rahegi?
+    </div>
+    <div>
+      <button id="promise1-yes">YES</button>
+      <button id="promise1-no">NO</button>
+    </div>
+  </div>
+
+  <!-- Step 11: Promise 2 -->
+  <div id="screen-promise-2" class="screen" style="display:none;">
+    <div class="typewriter">
+      Waada karo, chahe kuch bhi ho, tum apni ye 'Butkii' wali smile nahi kam hogi samjiii.
+    </div>
+    <button id="go-gift">Next ➝</button>
+  </div>
+
+  <!-- Step 12: Gift Box Explosion -->
+  <div id="screen-gift" class="screen" style="display:none;">
+    <div id="gift-box">🎁</div>
+    <div id="gift-message" style="display:none;">
+      <h1 id="birthday-text">
+        Happy Birthday Shraddha!  
+        I hope your day is full of smiles, warmth, and all the love you truly deserve.
+      </h1>
+    </div>
+  </div>
+
+  <!-- Step 13: 3D Photo Album -->
+  <div id="screen-album" class="screen" style="display:none;">
+    <div id="album-book">
+      <div class="album-page" id="page-left">
+        <img id="photo-left" src="ps1.jpg" alt="Shraddha photo 1">
+      </div>
+      <div class="album-page" id="page-right">
+        <img id="photo-right" src="ps2.jpg" alt="Shraddha photo 2">
+      </div>
+    </div>
+    <button id="album-prev">◀</button>
+    <button id="album-next">▶</button>
+    <button id="go-letter">Next ➝</button>
+  </div>
+
+  <!-- Step 14: Lifafa Message -->
+  <div id="screen-lifafa" class="screen" style="display:none;">
+    <div id="envelope">
+      ✉️
+    </div>
+    <div id="letter" style="display:none;">
+      <div class="typewriter">
+        i know m bht si chize nhi de skta lekin phir bhi kuch chahiye ho to Priyanshu yani muje jarur btana birthday girl samji ho ske to m jarur puri krunga
+      </div>
+      <button id="go-fireworks">Next ➝</button>
+    </div>
+  </div>
+
+  <!-- Step 15: Fireworks + SHRADDHA -->
+  <div id="screen-fireworks" class="screen" style="display:none;">
+    <div id="countdown"></div>
+    <div id="fireworks-area" style="display:none;">
+      <div id="name-shraddha">S-H-R-A-D-D-H-A</div>
+    </div>
+    <button id="go-soul" style="display:none;">Next ➝</button>
+  </div>
+
+  <!-- Step 16: Soul Message -->
+  <div id="screen-soul" class="screen" style="display:none;">
+    <div class="typewriter" id="soul-question">
+      Kya aap PS ka message padhna chahogi?
+    </div>
+    <button id="soul-yes">YES</button>
+    <audio id="zoroor-audio" src="zoroor.mp3"></audio>
+
+    <div id="soul-message-container" style="display:none;">
+      <div id="soul-message" class="typewriter"></div>
+      <button id="go-last" style="display:none;">Madam jii 💗</button>
+    </div>
+  </div>
+
+  <!-- Step 17: Her Message to Priyanshu -->
+  <div id="screen-last" class="screen" style="display:none;">
+    <div class="typewriter">
+      Kuch likho jo tum Priyanshu ko hamesa se bolna chahti thi...
+    </div>
+    <textarea id="her-message" rows="6" placeholder="Yaha likho apna secret message..."></textarea>
+    <button id="send-message">Send</button>
+    <div id="thank-you" style="display:none;">
+      Thank you Butkii, ye message Priyanshu tak pahunch gaya. 💗
+    </div>
+  </div>
+
 </body>
 </html>
